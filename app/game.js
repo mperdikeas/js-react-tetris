@@ -346,8 +346,7 @@ const Game = React.createClass({
                       newGame={this.newGame}
                       />);
             return (
-                    <div style={gameStyle}>
-                    <h1>No more maintained, a dedicated <a href='https://github.com/mperdikeas/js-react-tetris'>github repo</a> has been created for future development!</h1>
+                <div style={gameStyle}>
                 <div style={wellStyle}>                    
                     <CellContainer
                         cells={cells}
