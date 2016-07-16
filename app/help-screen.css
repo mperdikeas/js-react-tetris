@@ -1,0 +1,17 @@
+span.key {
+    background-color: black;
+    color: white;
+    padding: 3px;
+    font-family: monospace;
+}
+
+button {
+    position: relative;
+    top: 20px;
+    left: 20px;
+    background-color: limegreen;
+    color: white;
+    font-weight: bold;
+    padding: 0.5em;
+    font-size: 120%;
+}
