@@ -229,7 +229,7 @@ class Brick {
         return new Brick([new Point(1,0), new Point(1,-1), new Point(1,-2), new Point(0,-2)], v, new Point(0.5, -0.5));
     }    
     static randomBrick: ()=>Brick = function() {
-        const BRICKS = [Brick.createSquare, Brick.createRafter/*, Brick.createBracket, Brick.createS1, Brick.createS2, Brick.gammaR, Brick.gammaL*/];
+        const BRICKS = [Brick.createSquare, Brick.createRafter, Brick.createBracket, Brick.createS1, Brick.createS2, Brick.gammaR, Brick.gammaL];
         return BRICKS[Math.floor(Math.random()*BRICKS.length)](Math.floor(Math.random()*1000*1000));
     };
     clone(): Brick {
