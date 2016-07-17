@@ -3,6 +3,9 @@
 const     _ = require('lodash');
 const React = require('react');
 var      cx = require('classnames');
+
+import tinycolor from "tinycolor2";
+
 import assert from 'assert';
 
 function rainbow(numOfSteps, step) { // http://stackoverflow.com/a/7419630/274677
@@ -77,11 +80,19 @@ const Cell = React.createClass({
         }
     },
     render: function() {
+        const brickColor = tinycolor(COLORS[this.props.v % COLORS.length]);
+        const brickColorTop   = brickColor.clone().darken (10).toHexString();
+        const brickColorLeft  = brickColor.clone().darken (20).toHexString();
+        const brickColorRight = brickColor.clone().lighten(10).toHexString();
+        const brickColorBottom= brickColor.clone().lighten(20).toHexString();
         let borderStyle = {
             border: 'none'
         };
         const borderStyleOccupied = {
-            border: 'solid 1px black'
+            borderTop   : `solid 8px ${brickColorTop}`,
+            borderLeft  : `solid 8px ${brickColorLeft}`,
+            borderBottom: `solid 8px ${brickColorBottom}`,
+            borderRight : `solid 8px ${brickColorRight}`
         };
         const borderStyleWaterLine = {
             borderTop: 'solid 3px red'
@@ -97,7 +108,7 @@ const Cell = React.createClass({
             top: this.props.y*this.props.cellSideY,
             width:this.props.cellSideX,
             height: this.props.cellSideY,
-            background: this.props.v===null?'grey':COLORS[this.props.v % COLORS.length],
+            background: this.props.v===null?'grey':brickColor.toHexString(),
             position: 'absolute'
         }, borderStyle);
         return (

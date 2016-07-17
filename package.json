@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "build": "webpack --progress --colors",
-      "build-min": "webpack --config=webpack.min.config.js",
+    "build": "webpack --progress --colors",
+    "build-min": "webpack --config=webpack.min.config.js",
     "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build --port 8090"
   },
   "keywords": [],
@@ -33,6 +33,7 @@
     "lodash": "^4.6.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "react-timer-mixin": "^0.13.3"
+    "react-timer-mixin": "^0.13.3",
+    "tinycolor2": "^1.4.1"
   }
 }
