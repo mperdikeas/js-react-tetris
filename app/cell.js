@@ -108,7 +108,7 @@ const Cell = React.createClass({
             top: this.props.y*this.props.cellSideY,
             width:this.props.cellSideX,
             height: this.props.cellSideY,
-            background: this.props.v===null?'grey':brickColor.toHexString(),
+            background: this.props.v===null?'#000':brickColor.toHexString(),
             position: 'absolute'
         }, borderStyle);
         return (
