@@ -24,13 +24,11 @@ const HelpContainer = React.createClass({
     render: function() {
         let containerStyle = {
             position: 'relative',
-            top: '-12px',
             display: 'inline-block',
             width : this.props.width,
             height: this.props.height,
-//            border: '2px dotted red',
-            padding: 0
-//            boxSizing: 'border-box'
+            padding: 0,
+            verticalAlign: 'top'
         };
         return (
             <div style={containerStyle}

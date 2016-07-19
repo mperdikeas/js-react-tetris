@@ -31,7 +31,8 @@ const Score = React.createClass({
             position: 'relative',
             display: 'inline-block',
             width : this.props.width,
-            height: this.props.height
+            height: this.props.height,
+            verticalAlign: 'top'
         };
         let scoreStyle = {
             color: '#a0ff47',
