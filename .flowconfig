@@ -1,0 +1,9 @@
+[ignore]
+    <PROJECT_ROOT>/node_modules/fbjs/lib/
+[include]
+
+[libs]
+
+[options]
+    esproposal.class_static_fields=enable
+    module.name_mapper.extension='css' -> '<PROJECT_ROOT>/flow/stub/css-modules.js'

@@ -1,3 +1,4 @@
+//@flow
 'use strict';
 const     _ = require('lodash');
 const React = require('react');
@@ -13,7 +14,7 @@ const ArrowBand = React.createClass({
         height: React.PropTypes.number.isRequired,
         highlighted: React.PropTypes.number.isRequired
     },    
-    arrowDownStyle: function (i) {
+    arrowDownStyle: function (i: number): {display: string, width: number, height: number, borderRight: string, borderTop: string, borderBottom: string, margin: string} {
         if (!( (i>=-1) && (i<4) )) throw new Error(`${i} has to lie in [0, 4)`);
         //  highlighted value of -1 means no arrow is highlighted
         const color = i===this.props.highlighted?'#5cfa00':'#1c4d00'; // http://hslpicker.com/

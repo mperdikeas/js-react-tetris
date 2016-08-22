@@ -2,7 +2,11 @@
 'use strict';
 
 class CellInfo {
-    constructor(x, y, v, waterLine) {
+    x: number;
+    y: number;
+    v: number;
+    waterLine: boolean;
+    constructor(x: number, y: number, v:number, waterLine: boolean) {
         this.x = x;
         this.y = y;
         this.v = v;
