@@ -55,7 +55,7 @@ class Point {
     clone(): Point {
         return new Point(this.x, this.y);
     }
-    toString(): String {
+    toString(): string {
         return `(${this.x}, ${this.y})`;
     }
 }
@@ -287,10 +287,10 @@ class GridWithBrick {
     }
     isStuck(): boolean {
         if (this.brick != null) {
-            assert(this.brick!==null, 'bug');
+            const nonNullBrick: Brick = this.brick;
             if (this.brickLocation != null) {
-                assert(this.brickLocation!==null, 'bug');
-                return this.grid.isStuck(this.brickLocation.x, this.brickLocation.y, this.brick);
+                const brickLocation: Point = this.brickLocation;
+                return this.grid.isStuck(brickLocation.x, brickLocation.y, nonNullBrick);
             } else throw new Error('when brick is not null, so should brickLocation');
         } else throw new Error('bad choreography calling isStuck on grid with no brikc');
     }
@@ -377,48 +377,59 @@ class GridWithBrick {
         }
     }
     drop(): GridWithBrickAndActionResultAndDropVector {
-        if (this.brick===null)
-            throw new Error('bad choreography'); // TODO: compare with lower()
-        const breadth = this.brick.breadth();
-        const height  = this.brick.height();
-        const pointA: Point = this.brickLocation.clone();
-        let pointB: Point;
-        let lowerResult: GridWithBrickAndActionResult = this.lower();
-        let initialLowerResult: boolean = lowerResult.actionResult;
-        for (; !lowerResult.gridWithBrick.grid.isStuck(lowerResult.gridWithBrick.brickLocation.x
-                                                      , lowerResult.gridWithBrick.brickLocation.y
-                                                      , lowerResult.gridWithBrick.brick)
-             ; lowerResult = lowerResult.gridWithBrick.lower()) {
-            pointB = lowerResult.gridWithBrick.brickLocation;
-        }
-        const shiftX = ((breadth)=>{
-            switch (breadth) {
-            case 0: return 0;
-            case 1: return 0.5;
-            case 2: return 0.5;
-            case 3: return 0.5;
-            default:
-                throw new Error(`unhandled case: [${breadh}]`);
-            }
-        })(breadth);
-        const shiftY = ((height)=>{
-            switch (height) {
-            case 0: return 0.5;
-            case 1: return 0.5;
-            case 2: return 1.5;
-            case 3: return 2.5;
-            default:
-                throw new Error(`unhandled case: [${height}]`);
-            }
-        })(height);
-                       
-        const dropVector = new Vector(pointA.moveX(shiftX), pointB.moveX(shiftX).moveY(-shiftY));
-        assert(dropVector.isVertical());
-        return new GridWithBrickAndActionResultAndDropVector(
-            lowerResult.gridWithBrick,
-            initialLowerResult,
-            dropVector);
+        if (this.brick!=null) {
+            const thisBrick = this.brick;
+            const breadth = thisBrick.breadth();
+            const height  = thisBrick.height();            
+            if (this.brickLocation!=null) {
+                const pointA: Point = this.brickLocation.clone();
+                let pointB: ?Point;
+                let lowerResult: GridWithBrickAndActionResult = this.lower();
+                let initialLowerResult: boolean = lowerResult.actionResult;
+                if (lowerResult.gridWithBrick.brickLocation!=null) {
+                    if (lowerResult.gridWithBrick.brick!=null) {
+                        for (; !lowerResult.gridWithBrick.grid.isStuck(lowerResult.gridWithBrick.brickLocation.x
+                                                                       , lowerResult.gridWithBrick.brickLocation.y
+                                                                       , lowerResult.gridWithBrick.brick)
+                             ; lowerResult = lowerResult.gridWithBrick.lower()) {
+                            pointB = lowerResult.gridWithBrick.brickLocation;
+                        }
+                    } else throw new Error('lowerResult.gridWithBrick.brick cannot be null or undefined at this point');
+                } else throw new Error('lowerResult.gridWithBrick.brickLocation cannot be null or undefined at this point');
+
+                const shiftX = ((breadth)=>{
+                    switch (breadth) {
+                    case 0: return 0;
+                    case 1: return 0.5;
+                    case 2: return 0.5;
+                    case 3: return 0.5;
+                    default:
+                        throw new Error(`unhandled case: [${breadth}]`);
+                    }
+                })(breadth);
+                const shiftY = ((height)=>{
+                    switch (height) {
+                    case 0: return 0.5;
+                    case 1: return 0.5;
+                    case 2: return 1.5;
+                    case 3: return 2.5;
+                    default:
+                        throw new Error(`unhandled case: [${height}]`);
+                    }
+                })(height);
+                if (pointB!=null) {
+                    const dropVector = new Vector(pointA.moveX(shiftX), pointB.moveX(shiftX).moveY(-shiftY));
+                    assert(dropVector.isVertical());
+                    return new GridWithBrickAndActionResultAndDropVector(
+                        lowerResult.gridWithBrick,
+                        initialLowerResult,
+                        dropVector);
+                } else throw new Error('pointB cannot be null or undefined at this point');
+            } else throw new Error('this.brickLocation cannot be null or undefined at this point');                
+        } else throw new Error('this.brick cannot be null or undefined at this point'); // TODO: compare with lower()
     }
+
+    
     moveLeft() : GridWithBrickAndActionResult {return this.moveX(true);}
     moveRight(): GridWithBrickAndActionResult {return this.moveX(false);}    
     moveX(leftOrRight: boolean): GridWithBrickAndActionResult {
@@ -436,7 +447,7 @@ class GridWithBrick {
             } else
                 return new GridWithBrickAndActionResult(this.clone(), false);            
         }
-    }        
+    }
 
     stuffInCoords(i: number, j: number): number | null {
         if (this.grid.occupied[i][j]!==null) {
