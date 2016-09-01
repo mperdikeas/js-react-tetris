@@ -8,7 +8,8 @@ import Cell          from './cell.js';
 
 const {Point, Brick, Grid, GridWithBrick, Vector, ExceptionalOssificationResult} = require( '../modules/grid-brick/es5/index.js');
 
-import {createChainableTypeChecker} from './chainable-type-checker.js';
+import {createChainableTypeChecker} from 'react-chainable-type-checker';
+
 import {CellInfo} from './cell-info.js';
 
 function isCellInfoArrayValidator(props, propName, componentName, location) {
