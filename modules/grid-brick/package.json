@@ -29,7 +29,6 @@
     "assert": "^1.4.1",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-polyfill": "^6.7.4",
-    "lodash": "^4.10.0",
-    "source-map-support": "^0.4.0"
+    "lodash": "^4.10.0"
   }
 }

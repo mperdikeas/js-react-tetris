@@ -1,6 +1,15 @@
 // @flow
 'use strict';
 
+if (false) /* I was having some problems in my Ubuntu 16.04 (node v6.9 / npm 3.10.8) setup:
+---%<------------------------------------
+ERROR in ../modules/grid-brick/~/source-map-support/source-map-support.js
+Module not found: Error: Cannot resolve module 'module' in /home/mperdikeas/js-react-tetris/modules/grid-brick/node_modules/source-map-support
+ @ ../modules/grid-brick/~/source-map-support/source-map-support.js 464:17-34
+------------------------------------>%---
+
+ .. so I decided to disable source-map-support.
+*/
 (function() {
     const sourceMapSupport = require('source-map-support');
     sourceMapSupport.install();
