@@ -35,7 +35,8 @@ const HelpContainer = React.createClass({
                  onMouseEnter={this.onMouseEnter}
                   onMouseLeave={this.onMouseLeave}
             >
-                <Help height={this.props.height}
+                <Help width={this.props.width}
+                      height={this.props.height}
                       showHelp={this.props.showHelp}
                       hovered={this.state.hovered}
                  />

@@ -7,7 +7,13 @@
     "build": "webpack --progress --colors",
     "build-min": "webpack --config=webpack.min.config.js",
     "dev": "webpack-dev-server --devtool eval --progress --colors --content-base build --port 8090",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow.README": [
+          "If you wish to run flow continuously use the following incantation (from the command line): ",
+          "$ watch -n 1 -t -d npm run flow                                                             "
+      ],
+    "flow-stop": "flow stop"
+      
   },
   "keywords": [],
   "author": "",

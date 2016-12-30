@@ -91,8 +91,10 @@ const Cell = React.createClass({
             return (v+Math.floor(SPAN/2)) % COLORS.length;
         }
     },
+    shouldComponentUpdate(nextProps: any, nextState: any) {
+        return (this.props.v!==nextProps.v);
+    },
     render: function() {
-
         let borderStyle = {
             border: 'none'
         };

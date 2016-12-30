@@ -41,16 +41,16 @@ const Messages = React.createClass({
             fontSize: '90%',
             display: 'inline-block'            
         };
-        const messageDivs = this.props.messages.map( (x)=>{
+        const messageDivs = this.props.messages.map( (x, i)=>{
             return (
-                <div>
-                    <span style={scoreStyle(x.score)}>
-                        {(x.score>0?'+':'')+x.score}
-                    </span>
-                    <br/>
-                    <span style={msgStyle}>{x.msg}</span>
-                </div>
-            );
+                    <div key={i}>
+                        <span style={scoreStyle(x.score)}>
+                            {(x.score>0?'+':'')+x.score}
+                        </span>
+                        <br/>
+                        <span style={msgStyle}>{x.msg}</span>
+                    </div>
+                   );
         } );
         return (
             <div style={containerStyle}>

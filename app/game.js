@@ -171,7 +171,8 @@ const Game = React.createClass({
         this._executeStateTransitionPath(states, interval, fToCallAtTheEnd);
     },
     _executeStateTransitionPath(states, interval, fToCallAtTheEnd) {
-        console.log(`transition to state: ${JSON.stringify(states[0])}`);
+        if (false)
+            console.log(`transition to state: ${JSON.stringify(states[0])}`);
         this.setState(states[0]);
         if (states.length > 1)
             this.setTimeout( ()=>{
@@ -191,7 +192,6 @@ const Game = React.createClass({
         this.setState({gameState: GameState.RUNNING});
     },
     newGame() {
-        console.log('new game called');
         assert(this.state.gameState === GameState.LOST);
         this.inTheMiddleOfNextStep = false;
         this.inTheMiddleOfTransition = false;
@@ -243,7 +243,6 @@ const Game = React.createClass({
                         states.push({gameGrid: ossificationResult});
                         const horizontalFills = this.state.gameGrid.grid.horizontalFills();
                         assert(horizontalFills.length<=4, `Expected horizontal fills to be <=4, yet it was: ${horizontalFills.length}`);
-                        console.log(`${horizontalFills.length} horizontal fills found`);
                         if (horizontalFills.length > 0) {
                             states.push({flash: horizontalFills});
                             states.push({flash: []});
@@ -341,9 +340,11 @@ const Game = React.createClass({
             let lose = null;
             if (this.state.gameState === GameState.LOST)
                 lose = (<LoseScreen
-                      wellWidth={this.props.x}
-                      wellHeight={this.props.y}
-                      newGame={this.newGame}
+                        wellWidth={this.props.x}
+                        wellHeight={this.props.y}
+                        score={this.state.score}
+                        linesCleared={this.state.linesCleared}
+                        newGame={this.newGame}
                       />);
             return (
                 <div style={gameStyle}>
